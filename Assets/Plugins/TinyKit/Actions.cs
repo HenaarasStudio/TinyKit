@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -9,102 +6,63 @@ using UnityEngine.SceneManagement;
 [AddComponentMenu("TinyKit/Actions")]
 public class Actions : MonoBehaviour
 {
-    private string GameDataFilePath;
-    void Awake()
+    void Start()
     {
-        GameDataFilePath = Application.persistentDataPath + "/gamedata.json";
+        this.gameObject.AddComponent<AudioSource>();
     }
-    //void Start() { }
-    //void Update() { }
 
     public void ExitGame()
     {
         Application.Quit();
     }
 
-    public void AudioPlay(GameObject audioGameObject = null)  // Null == This Game Object
+    public void PlaySound(AudioClip Audio, GameObject Object)
     {
-        (audioGameObject != null ? audioGameObject : gameObject).GetComponent<AudioSource>().Play();
+        var component = Object.AddComponent<AudioSource>();
+        component.clip = Audio;
+        component.Play();
     }
 
-    public void AudioStop(GameObject audioGameObject = null)  // Null == This Game Object
-    {
-        (audioGameObject != null ? audioGameObject : gameObject).GetComponent<AudioSource>().Stop();
+    public void PlayMusic(AudioClip Audio)
+    {  
+        var component = this.gameObject.GetComponent<AudioSource>();
+        component.clip = Audio;
+        component.Play();
     }
 
-    public Dictionary<int, object> DataLoad()  // Null == File Not Found
+    public void StopMusic()
     {
-        return File.Exists(GameDataFilePath) ? JsonUtility.FromJson<Dictionary<int, object>>(File.ReadAllText(GameDataFilePath)) : null;
+        this.gameObject.GetComponent<AudioSource>().Stop();
     }
 
-    public bool DataStore(Dictionary<int, object> gameData)  // False == Store Failed
+    public void LoadScene(string SceneName)
     {
-        try
-        {
-            File.WriteAllText(GameDataFilePath, JsonUtility.ToJson(gameData));
-            return true;
-        }
-        catch (Exception)
-        {
-            return false;
-        }
+        SceneManager.LoadScene(SceneName);
     }
 
-    public void ChapterLoad(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-    }
-
-    public void ChapterRestart()
+    public void RestartScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public GameObject SpownGameObject(GameObject prefab, Vector3 position, Quaternion? rotation = null)  // Null == Quaternion.identity
+    public GameObject SpawnGameObject(GameObject Prefab, Vector3 Position)  // Null == Quaternion.identity
     {
-        return Instantiate(prefab, position, rotation != null ? rotation.Value : Quaternion.identity);
+        return Instantiate(Prefab, Position, Quaternion.identity);
     }
     
-    public void DestroyGameObject(GameObject gameObject)
+    public void DestroyGameObject(GameObject Object)
     {
-        Destroy(gameObject);
+        Destroy(Object);
     }
     
-    public void ActivateGameObject(GameObject gameObject)
+    public void ActivateGameObject(GameObject Object)
     {
-        gameObject.SetActive(true);
+        Object.SetActive(true);
     }
 
-    public void DeactivateGameObject(GameObject gameObject)
+    public void DeactivateGameObject(GameObject Object)
     {
-        gameObject.SetActive(false);
+        Object.SetActive(false);
     }
 
-    public void MoneyIncrease(GameObject gameManagerObject, string gameManagerScriptName, int difference)
-    {
-        Component component = gameManagerObject.GetComponent(gameManagerScriptName);
-        PropertyInfo moneyProperty = component.GetType().GetProperty("Money", typeof(int));
-        moneyProperty.SetValue(component, (int)moneyProperty.GetValue(component) + difference);
-    }
-
-    public void Moneydecrease(GameObject gameManagerObject, string gameManagerScriptName, int difference)
-    {
-        Component component = gameManagerObject.GetComponent(gameManagerScriptName);
-        PropertyInfo moneyProperty = component.GetType().GetProperty("Money", typeof(int));
-        moneyProperty.SetValue(component, (int)moneyProperty.GetValue(component) - difference);
-    }
-
-    public void LifeIncrease(GameObject gameManagerObject, string gameManagerScriptName, int difference)
-    {
-        Component component = gameManagerObject.GetComponent(gameManagerScriptName);
-        PropertyInfo moneyProperty = component.GetType().GetProperty("Life", typeof(int));
-        moneyProperty.SetValue(component, (int)moneyProperty.GetValue(component) + difference);
-    }
-
-    public void Lifedecrease(GameObject gameManagerObject, string gameManagerScriptName, int difference)
-    {
-        Component component = gameManagerObject.GetComponent(gameManagerScriptName);
-        PropertyInfo moneyProperty = component.GetType().GetProperty("Life", typeof(int));
-        moneyProperty.SetValue(component, (int)moneyProperty.GetValue(component) - difference);
-    }
 }

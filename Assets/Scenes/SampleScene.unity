@@ -229,6 +229,7 @@ GameObject:
   - component: {fileID: 863604777}
   - component: {fileID: 863604782}
   - component: {fileID: 863604780}
+  - component: {fileID: 863604781}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Player
@@ -315,6 +316,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &863604781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863604776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8b4ab6a6d2d9f64daf12f331d345f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &863604782
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -339,6 +352,7 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
+  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -411,6 +425,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aa3588d9d9cc9840a86472bade4d59a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Enable: 0
+  target: {fileID: 0}
+  cameraType: 0
 --- !u!1 &2133612428
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,6 +452,8 @@ GameObject:
   - component: {fileID: 2133612431}
   - component: {fileID: 2133612430}
   - component: {fileID: 2133612429}
+  - component: {fileID: 2133612433}
+  - component: {fileID: 2133612434}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -506,3 +537,56 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2133612433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133612428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 003c25630808c7243847bd9149749434, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _AwakeEvent:
+    _PersistentCalls: []
+  _StartEvent:
+    _PersistentCalls:
+    - _Target: {fileID: 863604781}
+      _MethodName: SetString
+      _PersistentArguments:
+      - _Type: 2
+        _Int: 0
+        _String: Player_name
+        _X: 0
+        _Y: 0
+        _Z: 0
+        _W: 0
+        _Object: {fileID: 0}
+      - _Type: 2
+        _Int: 0
+        _String: boz
+        _X: 0
+        _Y: 0
+        _Z: 0
+        _W: 0
+        _Object: {fileID: 0}
+  _EnableEvent:
+    _PersistentCalls: []
+  _DisableEvent:
+    _PersistentCalls: []
+  _DestroyEvent:
+    _PersistentCalls: []
+--- !u!114 &2133612434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2133612428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10ee58d8b25aa7844ad1dc7b6b94b09b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
